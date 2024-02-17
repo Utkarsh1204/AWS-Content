@@ -1,43 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<html>
+<head>
+	 <title>Movie Recommendation System</title>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
+  <link rel="stylesheet" href="index.css">
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+   <style>
+  	/* .movie {
+      color: #fff;
+    	margin-left: auto;
+    	margin-right: auto;
+      resize: none;
+    }
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  	.btn-block{
+    	width: 15%;
+    	text-align: center;
+    	margin-left: auto;
+    	margin-right: auto;
+    	color: #e4e0e0;
+    }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+    #content {
+    	background-image: url("../static/image.png");
+    	background-color: #181818
+    }
+
+  	.footer {
+  		color: #e4e0e0;
+  		text-align:right;
+  		position: fixed;
+     	bottom: 20px;
+     	right: 20px;
+     	width: 100%;
+  	}
+
+    .card {
+      cursor: pointer;
+    }
+
+    h1 {
+	    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	    color: #e50914;
+	    font-weight: bold;
+	    margin-top: 30px;
+	 }
+
+    #autoComplete {
+      background-position: 780px ;
+    } */
+
+  </style>
+
+  <script type="text/javascript">
+    var films = {suggestions|tojson};
+  </script>
+
+  <script type="text/javascript" src="{{url_for('static', filename='content.js')}}"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+
+</head>
+<body id="content" style="font-family: 'Noto Sans JP', sans-serif;">
+
+
+	<div class="ml-container" style="display: block;">
+    <center><h1 style=""> Movie Recommendation System</h1></center>
+		<form action="{{ url_for('recommend')}}">
+			<div class="form-group shadow-textarea" style="margin-top: 30px;text-align: center;color: white;">
+			<input type="text" name="movie" class="movie form-control" id="autoComplete" autocomplete="off" placeholder="Enter the Movie Name" style="background-color: #ffffff;border-color:#ffffff;width: 60%;color: #181818"/>
+		  <br>
+		</div>
+
+		<div class="form-group" style="text-align: center;">
+  <button type="submit" class="btn btn-primary btn-block" style="background-color: #e50914;text-align: center;border-color: #e50914;width:120px;">Enter</button><br><br>
+  </div>
+
+		
+	</form>
+		
+	</div>
+
+	<div class="results">
+
+		<!-- {% block content %}
+        {% endblock %} -->
+	</div>
+	
+	<div class="footer" style="">Created by Utkarsh<span style="font-size:150%;color:red;"> &hearts; </span></div>
+
+	
+	
+	<!-- <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+  <script>
+    new autoComplete({
+    data: {                              // Data src [Array, Function, Async] | (REQUIRED)
+      src: films,
+    },
+    selector: "#autoComplete",           // Input field selector              | (Optional)
+    threshold: 2,                        // Min. Chars length to start Engine | (Optional)
+    debounce: 100,                       // Post duration for engine to start | (Optional)
+    searchEngine: "strict",              // Search Engine type/mode           | (Optional)
+    resultsList: {                       // Rendered results list object      | (Optional)
+        render: true,
+        container: source => {
+            source.setAttribute("id", "food_list");
+        },
+        destination: document.querySelector("#autoComplete"),
+        position: "afterend",
+        element: "ul"
+    },
+    maxResults: 5,                         // Max. number of rendered results | (Optional)
+    highlight: true,                       // Highlight matching results      | (Optional)
+    resultItem: {                          // Rendered result item            | (Optional)
+        content: (data, source) => {
+            source.innerHTML = data.match;
+        },
+        element: "li"
+    },
+    noResults: () => {                     // Action script on noResults      | (Optional)
+        const result = document.createElement("li");
+        result.setAttribute("class", "no_result");
+        result.setAttribute("tabindex", "1");
+        result.innerHTML = "No Results";
+        document.querySelector("#autoComplete_list").appendChild(result);
+    },
+    onSelection: feedback => {             // Action script onSelection event | (Optional)
+        document.getElementById('autoComplete').value = feedback.selection.value;
+    }
+});
+
+
+  </script> -->
+
+</body>
 </html>
